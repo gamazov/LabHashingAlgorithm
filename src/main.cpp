@@ -1,19 +1,76 @@
+/*!
+\file
+\brief https://github.com/gamazov/LabHashingAlgorithm
+\author Mazov Grigiriy
+*/
+
 #include <fstream>
 #include <iostream>
+#include <vector>
 #include <string>
 #include <unordered_set>
-#include <vector>
 
+/*!
+\fn void parseStr(std::string input, std::vector<std::string> &output, char sym)
+\brief Finds elements separated by the sym symbol in the string str and writes the result to output
+\param[in] input The string in which the search is performed
+\param[in,out] output Found substrings
+\param[in] sym The character by which to divide the string
+*/
+
+/*!
+\fn void parseNo(Train &train)
+\brief Converts the string no to an unsigned number for comparison
+\param[in,out] train Structure to be filled in
+*/
+
+/*!
+\fn void parseData(Train &train)
+\brief Converts the data string to an unsigned number for comparison
+\param[in,out] train Structure to be filled in
+*/
+
+/*!
+\fn void parseTime(Train &train)
+\brief Converts the string time to an unsigned number for comparison
+\param[in,out] train Structure to be filled in
+*/
+
+/*!
+\fn void parseOnRoad(Train &train)
+\brief Converts the string on Road to an unsigned number for comparison
+\param[in,out] train Structure to be filled in
+*/
+
+/*!
+\fn void parseFile(std::vector<Train> &schedules, char *fileName)
+\brief All schedule entries are filled in by reading data from the transmitted file
+\param[in,out] schedules Schedule to be filled in
+\param[in] fileName The file in which the search takes place
+*/
+
+/*!
+\brief Describes the recording of the train schedule
+*/
 struct Train {
+  //! Departure date
   std::string data;
+  //! Departure time
   std::string time;
+  //! Train number
   std::string no;
+  //! Travel time
   std::string onRoad;
+  //! Type of train
   std::string type;
 
+  //! Date represented as an unsigned number for comparison
   unsigned int dataVal = 0;
+  //! Departure time, represented as an unsigned number for comparison
   unsigned int timeVal = 0;
+  //! A number represented as an unsigned number for comparison
   unsigned int noVal = 0;
+  //! Travel time, represented as an unsigned number for comparison
   unsigned int onRoadVal = 0;
 
   bool operator==(const Train &s) const {
@@ -31,8 +88,16 @@ void parseTime(Train &train);
 void parseOnRoad(Train &train);
 
 #ifdef HASH1
+/*!
+\brief The first hash function
+*/
 class hash {
 public:
+  /*!
+  \brief The operator of taking a hash from an object
+  \param[in] train The object for which the hash is taken
+  \return Number - hash of the object
+  */
   size_t operator()(const Train &train) const {
     unsigned int result = 0;
 
@@ -54,8 +119,16 @@ public:
 #endif // HASH1
 
 #ifdef HASH2
+/*!
+\brief The second hash function
+*/
 class hash {
 public:
+  /*!
+  \brief The operator of taking a hash from an object
+  \param[in] train The object for which the hash is taken
+  \return Number - hash of the object
+  */
   size_t operator()(const Train &train) const {
     unsigned int result = 0;
 
